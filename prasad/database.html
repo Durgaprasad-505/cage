@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Page - SSAutomation Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f3;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #d3d3d3;
+            color: #ecf0f1;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header .logo {
+            margin-left: 20px;
+            background-color: white;
+        }
+        .header .nav-buttons {
+            margin-right: 20px;
+            display: flex;
+        }
+        .header .nav-buttons a {
+            color: #66a3ff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 18px;
+            background-color: #333333;
+            border-radius: 5px;
+            border: 2px solid #ffffff;
+            transition: all 0.3s ease;
+        }
+        .header .nav-buttons a:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .container {
+            padding: 20px;
+        }
+        .table-container {
+            margin-bottom: 20px;
+            overflow-x: auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-height: 500px; /* Set the height of the table container */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px; /* Adjust this width based on your table structure */
+        }
+        table, th, td {
+            border: 1px solid #bdc3c7;
+        }
+        th {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 12px;
+            text-align: center; /* Center align text in headers */
+            position: sticky; /* Make the header sticky */
+            top: 0; /* Stick the header to the top */
+            z-index: 1; /* Ensure the header stays on top */
+        }
+        td {
+            padding: 10px;
+            text-align: center; /* Center align text in cells */
+            background-color: #ffffff;
+            color: #2c3e50;
+            transition: background-color 0.3s ease;
+        }
+        td:hover {
+            background-color: #ecf0f1;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container a, .button-container button {
+            background-color: #1abc9c;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button-container a:hover, .button-container button:hover {
+            background-color: #16a085;
+        }
+        .select-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .checkbox-container {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #bdc3c7;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Adjust width as needed */
+            height: 100px; /* Adjust height to make the div scrollable */
+            overflow-y: scroll;
+            display: inline-block;
+            text-align: left;
+            position: relative;
+            cursor: pointer;
+        }
+        .checkbox-container:hover .checkbox-content {
+            display: block;
+        }
+        .checkbox-content {
+            display: none;
+            position: absolute;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-height: 150px; /* Adjust height to make the div scrollable */
+            overflow-y: scroll;
+            z-index: 1;
+        }
+        .checkbox-content label {
+            display: block;
+            padding: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .styled-button {
+            background-color: #1abc9c;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .styled-button:hover {
+            background-color: #16a085;
+        }
+    
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="images/SSA_logo.png" alt="Logo" style="height: 50px;"> <!-- Replace with your logo -->
+        </div>
+        <div class="nav-buttons">
+            <a href="index.html">Home</a>
+            <a href="cage.html">Cage</a>
+            <a href="https://origin-www.ssautomation.in/">About</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="select-container">
+            <label for="data-select">Select Data to Display:</label>
+            <div id="data-select" class="checkbox-container">
+                <div class="checkbox-content">
+                    <label><input type="checkbox" value="All"> All Data</label>
+                    <label><input type="checkbox" value="None"> None</label>
+                    <label><input type="checkbox" value="Date"> Date</label>
+                    <label><input type="checkbox" value="Time"> Time</label>
+                    <label><input type="checkbox" value="camA_OD"> camA_OD</label>
+                    <label><input type="checkbox" value="camB_OD"> camB_OD</label>
+                    <label><input type="checkbox" value="camC_OD"> camC_OD</label>
+                    <label><input type="checkbox" value="camD_OD"> camD_OD</label>
+                    <label><input type="checkbox" value="camA_SH"> camA_SH</label>
+                    <label><input type="checkbox" value="camB_SH_left"> camB_SH_left</label>
+                    <label><input type="checkbox" value="camB_SH_right"> camB_SH_right</label>
+                    <label><input type="checkbox" value="camC_SH"> camC_SH</label>
+                    <label><input type="checkbox" value="camD_SH_left"> camD_SH_left</label>
+                    <label><input type="checkbox" value="camD_SH_right"> camD_SH_right</label>
+                    <label><input type="checkbox" value="camA_WW"> camA_WW</label>
+                    <label><input type="checkbox" value="camB_WW_right"> camB_WW_right</label>
+                    <label><input type="checkbox" value="camB_WW_left"> camB_WW_left</label>
+                    <label><input type="checkbox" value="camC_WW"> camC_WW</label>
+                    <label><input type="checkbox" value="camD_WW_left"> camD_WW_left</label>
+                    <label><input type="checkbox" value="camD_WW_right"> camD_WW_right</label>
+                    <label><input type="checkbox" value="Reason"> Reason</label>
+                </div>
+            </div>
+            <button id="show-data" class="styled-button">Show Database</button>
+            <button id="clear-data" class="styled-button">Clear Data</button>
+            <button id="downloadData" class="styled-button" style="display: none;">Download Data</button>
+        </div>
+        <div class="table-container" id="table-container" style="display: none;">
+            <table id="data-table">
+                <thead>
+                    <tr id="table-header">
+                        <!-- Table headers will be populated here -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <a href="index.html">Go Back Home</a>
+            <a href="cage.html">Cage</a>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 SSAutomation Solutions. All rights reserved.</p>
+    </div>
+
+    <script>
+        const url = 'fetch_data1.php'; // Update this URL to your actual data fetch URL
+        const dataSelect = document.getElementById('data-select');
+        const showDataButton = document.getElementById('show-data');
+        const clearDataButton = document.getElementById('clear-data');
+        const downloadDataButton = document.getElementById('downloadData');
+        const tableContainer = document.getElementById('table-container');
+        const tableHeader = document.getElementById('table-header');
+
+        dataSelect.addEventListener('change', (event) => {
+            const target = event.target;
+            if (target.value === 'All') {
+                const checkboxes = dataSelect.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => checkbox.checked = target.checked);
+            } else if (target.value === 'None') {
+                const checkboxes = dataSelect.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+            }
+        });
+
+        showDataButton.addEventListener('click', () => {
+            const selectedOptions = ['id'];
+            const checkboxes = dataSelect.querySelectorAll('input[type="checkbox"]');
+            let atLeastOneChecked = false;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked && checkbox.value !== 'All' && checkbox.value !== 'None') {
+                    selectedOptions.push(checkbox.value);
+                    atLeastOneChecked = true;
+                }
+            });
+
+            if (atLeastOneChecked) {
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error fetching data:', data.error);
+                        } else {
+                            const tableBody = document.querySelector('#data-table tbody');
+                            tableBody.innerHTML = ''; // Clear previous data
+                            tableHeader.innerHTML = ''; // Clear previous headers
+
+                            // Create table headers
+                            selectedOptions.forEach(option => {
+                                const th = document.createElement('th');
+                                th.textContent = option;
+                                tableHeader.appendChild(th);
+                            });
+
+                            // Populate table data
+                            data.records.forEach(record => {
+                                const row = document.createElement('tr');
+                                selectedOptions.forEach(option => {
+                                    const td = document.createElement('td');
+                                    td.textContent = record[option];
+                                    row.appendChild(td);
+                                });
+                                tableBody.appendChild(row);
+                            });
+
+                            tableContainer.style.display = 'block';
+                            downloadDataButton.style.display = 'block'; // Show download button
+                        }
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            } else {
+                tableContainer.style.display = 'none'; // Hide table if no checkboxes are checked
+                downloadDataButton.style.display = 'none'; // Hide download button
+                alert('Please select at least one option to display data.'); // Alert the user
+            }
+        });
+
+        clearDataButton.addEventListener('click', () => {
+            const tableBody = document.querySelector('#data-table tbody');
+            tableBody.innerHTML = ''; // Clear table data
+            tableHeader.innerHTML = ''; // Clear table headers
+            tableContainer.style.display = 'none'; // Hide table
+            downloadDataButton.style.display = 'none'; // Hide download button
+        });
+
+        downloadDataButton.addEventListener('click', () => {
+            const checkboxes = dataSelect.querySelectorAll('input[type="checkbox"]');
+            let atLeastOneChecked = false;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked && checkbox.value !== 'All' && checkbox.value !== 'None') {
+                    atLeastOneChecked = true;
+                }
+            });
+
+            if (!atLeastOneChecked) {
+                alert('Please select at least one option to download data.');
+            } else {
+                const table = document.getElementById('data-table');
+                const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+                XLSX.writeFile(workbook, 'data.xlsx');
+            }
+        });
+    </script>
+</body>
+</html>

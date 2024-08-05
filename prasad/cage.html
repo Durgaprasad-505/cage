@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cage Page - SSAutomation Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            height: 50px;
+            padding: 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d3d3d3;
+            color: #ffffff;
+        }
+
+        .nav .logo {
+            background-color: #ffffff;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .nav .logo img {
+            height: 60px;
+        }
+
+        .nav .buttons a {
+            color: #66a3ff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            background-color: #333333;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav .buttons a:hover {
+            background-color: #000000;
+            transform: scale(1.1);
+            color: #ffffff;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stats-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .stats-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 25%;
+            min-width: 200px;
+            height: 150px;
+            margin: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            border-bottom: 3px solid #000000;
+            border-top: 3px solid #000000;
+        }
+
+        .stats-box:hover {
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .stats-box:hover .label {
+            font-size: 25px;
+        }
+
+        .stats-box .label {
+            font-size: 18px;
+            margin: 0;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: font-size 0.2s ease;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stats-box .count {
+            font-size: 30px;
+            position: absolute;
+            bottom: 20px;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+        }
+
+        .stats-ok { background-color: rgba(0, 255, 0, 0.3); }
+        .stats-not-ok { background-color: rgba(255, 0, 0, 0.3); }
+        .stats-total { background-color: rgba(0, 0, 255, 0.3); }
+
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .button-container a {
+            background-color: #008cba;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-container a:hover {
+            background-color: #005f74;
+            color: white;
+        }
+
+        .footer {
+            padding: 20px;
+            background-color: #004080;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .production-details {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 25px;
+            font-size: 1.9em;
+	    background-color: #d3d3d3;
+            border-top: 3px solid #000000;
+            transition: background-color 0.5s ease, font-size 0.3s ease;
+        }
+
+        .machine-status {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 25px;
+            border-bottom: 3px solid #000000;
+            transition: background-color 0.5s ease, font-size 0.3s ease;
+            font-size: 1.9em;
+            background-color: #d3d3d3;
+        }
+
+        .status-check {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        .status-check button {
+            background-color: #008cba;
+            border: none;
+            color: white;
+            padding: 10px 50px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .status-check button:hover {
+            background-color: #005f94;
+        }
+
+        .status-check .status-text {
+            font-size: 2.1em;
+            margin: 20px 0;
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-check img {
+            height: 400px;
+            width: 400px;
+            margin-top: 20px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                height: auto;
+            }
+            .nav .buttons {
+                margin-top: 10px;
+            }
+            .nav .buttons a {
+                margin: 5px 0;
+            }
+            .stats-container {
+                flex-direction: column;
+            }
+            .stats-box {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats-box {
+                width: 80%;
+                min-width: 150px;
+                height: 120px;
+            }
+            .stats-box .label {
+                font-size: 16px;
+            }
+            .stats-box .count {
+                font-size: 24px;
+            }
+            .status-check img {
+                height: 200px;
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Second Header -->
+    <div class="nav">
+        <div class="logo">
+            <img src="images/SSA_logo.png" alt="Logo" style="height: 60px;"> <!-- Replace with your logo -->
+        </div>
+        <div class="buttons">
+            <a href="index.html">Home</a>
+            <a href="database.html">Database</a>
+            <a href="https://origin-www.ssautomation.in/">About</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="production-details">
+            Production Details
+        </div><br>
+        <div class="stats-container">
+            <div class="stats-box stats-ok">
+                <div class="label">OK Count</div>
+                <div class="count" id="okCount">0</div>
+            </div>
+            <div class="stats-box stats-not-ok">
+                <div class="label">Not OK Count</div>
+                <div class="count" id="notOkCount">0</div>
+            </div>
+            <div class="stats-box stats-total">
+                <div class="label">Total Count</div>
+                <div class="count" id="totalCount">0</div>
+            </div>
+        </div>
+        <div class="machine-status">
+            Machine status
+        </div>
+        <div class="status-check">
+            <button id="checkStatusBtn">Click here Know the Machine Status</button>
+            <div class="status-text" id="statusText"></div>
+        </div>
+        <div class="button-container">
+            <a href="database.html">Go to Database</a>
+            <a href="index.html">Home</a>
+            <a href="https://origin-www.ssautomation.in/">About</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 SSAutomation Solutions. All rights reserved.</p>
+    </div>
+
+    <script>
+        document.getElementById('checkStatusBtn').addEventListener('click', function() {
+            const url = 'featch_status_data.php';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching data:', data.error);
+                    } else {
+                        const machineStatus = data.machine_status;
+                        const statusText = document.getElementById('statusText');
+                        statusText.textContent = machineStatus ? 'Machine is running' : 'Machine is stopped';
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+
+        // Initial fetch for production counts
+        const url = 'fetch_data.php';
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error fetching data:', data.error);
+                } else {
+                    document.getElementById('okCount').innerText = data.ok_production_count;
+                    document.getElementById('notOkCount').innerText = data.not_ok_production_count;
+                    document.getElementById('totalCount').innerText = data.total_production_count;
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
